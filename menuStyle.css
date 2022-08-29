@@ -29,6 +29,9 @@ ul li{
     justify-content: space-between;
     cursor: pointer;
 }
+img{
+    margin: 30px;
+}
 /* Style for icon menu */
 ul li:hover p{
     transform: scale(1.5);
