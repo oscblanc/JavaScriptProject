@@ -7,10 +7,12 @@ const crear = (user) => {
     let span = document.createElement('span')
     span.classList.add('lista')
     span.innerHTML = `
-    Bienvenido ${user}
+    Welcome ${user}
     `
     let render = document.getElementById('render')
     render.appendChild(span)
+    // localStorage.setItem("user", dbUser)
+    // location.href="menu.html"
     window.location.href = "menu.html"
 }
 function errores(tipo){

@@ -5,17 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=h1, initial-scale=1.0">
     <link rel="stylesheet" href="./login.css">
-    <title>Document</title>
+    <script src="https://kit.fontawesome.com/accf6d5903.js" crossorigin="anonymous"></script>
+    <title>Login National Bank</title>
 </head>
 <body>
     <form id="formulario">
         <img src="img/bank.jpg" alt="Bank Logo" style="width:200px">
-        <span id="errorDatos" class="hide">Ingresa tus datos</span>
-        <input placeholder="ingresa tu user" id="usuario" type="text" class="customInput">
-        <span id="errorUsuario" class="hide">user incorrecto</span>
-        <input placeholder="ingresa tu password" id="password" type="password" class="customInput">
-        <span id="errorPassword" class="hide">password incorrecto</span>
-        <button class="customButton">Enviar</button>
+        <span id="errorDatos" class="hide">Enter your data</span>
+        
+        <label>
+            <i class="fa-solid fa-user"></i>
+            <input placeholder="Enter user" id="usuario" type="text" class="customInput">
+        </label>
+        <span id="errorUsuario" class="hide">incorrect user</span>
+        <label>
+            <i class="fa-solid fa-lock"></i>
+            <input placeholder="Enter Password" id="password" type="password" class="customInput">
+        </label>
+        <span id="errorPassword" class="hide">incorrect passwordo</span>
+        <button class="customButton">Login</button>
     </form>
 
     <div class="render" id="render"> 
