@@ -9,18 +9,14 @@ const btnWithdraw = document.getElementById("btnWithdraw");
 const ul=document.querySelector("ul")
 const empty = document.querySelector('.empty')
 
-// Create our number formatter.
+// formatter.
 const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
     minimumFractionDigits: 2,
-    /* 
-    the default value for minimumFractionDigits depends on the currency
-    and is usually already 2
-    */
   });
 
-// accept deposits from user, store deposits in array
+// Deposits
 btnDeposit.addEventListener('click', () => {
     // checks if deposit is a number
     if (isNaN(userDeposit.value)) {
@@ -34,17 +30,14 @@ btnDeposit.addEventListener('click', () => {
             return userDeposit.value = '';
         } 
         else {
-            alert("You deposited $" + userDeposit.value + " to your account.")
-            // push deposit to array
-            deposits.push(Number(userDeposit.value));
-            // calculate Total Balance
-            totalBalance += (Number(userDeposit.value));
-            // format TotalBalance to show $ XX.XX (2 decimal places)
-            let totalBalanceFormatted = formatter.format(totalBalance);
+            alert("You deposited $" + userDeposit.value + " to your account.") // Mesage in the screen
+            deposits.push(Number(userDeposit.value)); // push deposit to array
+            totalBalance += (Number(userDeposit.value)); // calculate new balance
+            localStorage.setItem("balance", totalBalance)
+            let totalBalanceFormatted = formatter.format(totalBalance); // format the balance
             document.getElementById("acctBalanceLbl").innerHTML = totalBalanceFormatted;
-            // print deposit to console to verify success
             console.log("$" + userDeposit.value);
-
+            // Creating the receipt message
             const text=userDeposit.value;
             const li=document.createElement('li');
             const p=document.createElement('p');
@@ -53,43 +46,35 @@ btnDeposit.addEventListener('click', () => {
             const h = new Date();
             let ho = h.toLocaleTimeString();
             p.textContent= da+ " @ "+ho+ ": You deposited $" +text+ " to your account";
+            // End of receipt
             li.appendChild(p);
             ul.appendChild(li);
-
-
-
-
             return userDeposit.value = '';
         }
     }
     
 });
 
-// accept withdrawals from user, store withdrawals in array
+// Withdrawals
 btnWithdraw.addEventListener('click', () => {
-    // checks if withdrawal is a number
-    if (isNaN(userWithdraw.value)) {
+    if (isNaN(userWithdraw.value)) { // checks if withdrawal is a number
         alert("Please enter a number.");
         return userWithdraw.value = '';
     }
     else {
-        // checks if withdrawal meets parameters
-        if (userWithdraw.value > totalBalance - 5) {
+        if (userWithdraw.value > totalBalance - 5) { // checks if withdrawal can be applied
             alert("Your total balance cannot drop below $5.");
             return userWithdraw.value = '';
         }
         else {
-            // push withdrawal to array
             withdrawals.push(Number(userWithdraw.value));
-            // calculate Total Balance
-            totalBalance -= (Number(userWithdraw.value));
-            // format TotalBalance to show $ XX.XX (2 decimal places)
-            let totalBalanceFormatted = formatter.format(totalBalance);
+            totalBalance -= (Number(userWithdraw.value)); // calculate new Balance
+            localStorage.setItem("balance", totalBalance)
+            let totalBalanceFormatted = formatter.format(totalBalance); // format the balance
             document.getElementById("acctBalanceLbl").innerHTML = totalBalanceFormatted;
             alert("You withdrew $" + userWithdraw.value + " from your account.")
-            // print withdrawal to console to verfify success
             console.log("$" + userWithdraw.value);
-
+            // Creating the receipt message
             const text=userWithdraw.value;
             const li=document.createElement('li');
             const p=document.createElement('p');
@@ -100,14 +85,11 @@ btnWithdraw.addEventListener('click', () => {
             p.textContent= da+ " @ "+ho+ ": You withdrew $" +text+ " from your account";
             li.appendChild(p);
             ul.appendChild(li);
-
+            // End of receipt
             return userWithdraw.value = '';
         }
         
     }
 });
-
-// format TotalBalance to show $ XX.XX (2 decimal places)
-
-let totalBalanceFormatted = formatter.format(totalBalance);
+let totalBalanceFormatted = formatter.format(totalBalance); // format the total balance, localStorage.getItem("balance")
 document.getElementById("acctBalanceLbl").innerHTML = totalBalanceFormatted;
